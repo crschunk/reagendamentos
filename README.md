@@ -1,18 +1,23 @@
-# Oftalmoplus Dashboard
+# Oftalmoplus - Absenteísmo & Reagendamento
 
-## Pré-requisitos
+Dashboard em React + Vite para acompanhar faltas, reagendamentos e status operacionais a partir de uma planilha do Google Sheets.
 
-- Node.js 22 ou superior
+## Requisitos
+
+- Node.js 22
 - npm
 
-## Como rodar
+## Instalação
 
 ```bash
 npm install
-npm run dev
 ```
 
-Se você usa `nvm`, rode `nvm install 22` antes.
+## Desenvolvimento
+
+```bash
+npm run dev
+```
 
 ## Build
 
@@ -20,6 +25,20 @@ Se você usa `nvm`, rode `nvm install 22` antes.
 npm run build
 ```
 
-## Acesso
+## Deploy
 
-Abra a URL exibida pelo Vite, normalmente `http://localhost:5173`.
+O projeto gera arquivos estáticos em `dist/` e pode ser publicado em qualquer host de front-end estático.
+
+## Fonte de dados
+
+O dashboard consome uma planilha publicada do Google Sheets. Se a origem mudar, atualize a constante `SHEETS_CSV_URL` em `DashboardOftalmoplus.jsx`.
+
+## Estrutura
+
+- `src/` aplicação principal
+- `DashboardOftalmoplus.jsx` dashboard principal
+- `dist/` build de produção
+
+## Licença
+
+MIT
