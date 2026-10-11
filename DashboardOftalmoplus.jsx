@@ -163,6 +163,9 @@ function pickValue(record, aliases) {
 function normalizeStatus(value) {
   const normalized = normalizeText(value);
 
+  // The sheet now uses operational statuses from the scheduling system.
+  if (normalized === "finalizado" || normalized.includes("finalizad")) return "Reagendado";
+  if (normalized === "faltante" || normalized.includes("falt")) return "Para Reagendar";
   if (normalized === "reagendado" || normalized.includes("reagendado")) return "Reagendado";
   if (normalized === "emandamento" || normalized.includes("andamento")) return "Em Andamento";
   if (normalized === "reagendar" || normalized === "parareagendar" || normalized.includes("reagendar")) return "Para Reagendar";
@@ -186,7 +189,9 @@ function transformRows(rows) {
 
     const date = pickValue(rawRecord, ["data", "datadoagendamento", "datadafalta", "datafalta", "faltouem"]);
     const unit = pickValue(rawRecord, ["unidade", "clinica", "local"]);
-    const patient = pickValue(rawRecord, ["paciente", "nome", "nomedopaciente", "cliente"]);
+    // In the current export, the patient name is placed under "Profissional"
+    // and the "Paciente" column is empty. Keep both layouts supported.
+    const patient = pickValue(rawRecord, ["paciente", "nome", "nomedopaciente", "cliente", "profissional"]);
     const phone = pickValue(rawRecord, ["telefone", "celular", "contato", "whatsapp"]);
     const paymentMethod = pickValue(rawRecord, ["formadepagamento", "pagamento", "convenio"]);
     const rawStatus = pickValue(rawRecord, ["status", "situacao", "reagendamento"]);
